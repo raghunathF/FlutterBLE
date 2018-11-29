@@ -409,6 +409,16 @@
               <FileType>1</FileType>
               <FilePath>.\Source\FlutterName.c</FilePath>
             </File>
+            <File>
+              <FileName>FlutterBLEControl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FlutterBLEControl.c</FilePath>
+            </File>
+            <File>
+              <FileName>FlutterUART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FlutterUART.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1978,6 +1988,16 @@
               <FileName>FlutterName.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Include\FlutterName.h</FilePath>
+            </File>
+            <File>
+              <FileName>FlutterUART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\FlutterUART.h</FilePath>
+            </File>
+            <File>
+              <FileName>FlutterBLEControl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\FlutterBLEControl.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2391,6 +2411,16 @@
               <FileType>1</FileType>
               <FilePath>.\Source\FlutterName.c</FilePath>
             </File>
+            <File>
+              <FileName>FlutterBLEControl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FlutterBLEControl.c</FilePath>
+            </File>
+            <File>
+              <FileName>FlutterUART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FlutterUART.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3960,6 +3990,16 @@
               <FileName>FlutterName.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Include\FlutterName.h</FilePath>
+            </File>
+            <File>
+              <FileName>FlutterUART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\FlutterUART.h</FilePath>
+            </File>
+            <File>
+              <FileName>FlutterBLEControl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\FlutterBLEControl.h</FilePath>
             </File>
           </Files>
         </Group>

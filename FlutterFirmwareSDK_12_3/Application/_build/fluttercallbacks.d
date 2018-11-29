@@ -40,3 +40,4 @@
 .\_build\fluttercallbacks.o: ..\components\softdevice\s132\headers\ble_gatts.h
 .\_build\fluttercallbacks.o: ..\components\ble\common\ble_srv_common.h
 .\_build\fluttercallbacks.o: ..\components\libraries\util\app_util.h
+.\_build\fluttercallbacks.o: Include\FlutterUART.h

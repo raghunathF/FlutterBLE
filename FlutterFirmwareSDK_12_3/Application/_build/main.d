@@ -14,6 +14,7 @@
 .\_build\main.o: C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.11.1\Device\Include\nrf51_to_nrf52.h
 .\_build\main.o: C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.11.1\Device\Include\nrf52_name_change.h
 .\_build\main.o: C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.11.1\Device\Include\compiler_abstraction.h
+.\_build\main.o: ..\components\drivers_nrf\delay\nrf_delay.h
 .\_build\main.o: ..\components\softdevice\s132\headers\ble_hci.h
 .\_build\main.o: ..\components\ble\common\ble_advdata.h
 .\_build\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
@@ -60,3 +61,4 @@
 .\_build\main.o: Include\configGlobal.h
 .\_build\main.o: Include\FlutterBLEinit.h
 .\_build\main.o: Include\FlutterBLEPinout.h
+.\_build\main.o: Include\FlutterBLEControl.h

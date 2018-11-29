@@ -26,6 +26,7 @@
 .\_build\flutterblebsp.o: ..\components\libraries\util\nordic_common.h
 .\_build\flutterblebsp.o: ..\components\libraries\util\app_error_weak.h
 .\_build\flutterblebsp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\_build\flutterblebsp.o: ..\components\drivers_nrf\delay\nrf_delay.h
 .\_build\flutterblebsp.o: ..\components\boards\boards.h
 .\_build\flutterblebsp.o: ..\components\boards\pca10040.h
 .\_build\flutterblebsp.o: Include\FlutterBLEPinout.h
@@ -38,3 +39,4 @@
 .\_build\flutterblebsp.o: ..\components\softdevice\s132\headers\nrf_nvic.h
 .\_build\flutterblebsp.o: Include\FlutterBLEBSP.h
 .\_build\flutterblebsp.o: Include\FlutterCallbacks.h
+.\_build\flutterblebsp.o: Include\FlutterUART.h

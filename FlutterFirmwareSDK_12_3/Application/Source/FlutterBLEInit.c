@@ -31,13 +31,6 @@ static ble_uuid_t                       m_adv_uuids[] = {{BLE_UUID_NUS_SERVICE, 
 
 #define IS_SRVC_CHANGED_CHARACT_PRESENT 0                                           /**< Include the service_changed characteristic. If not enabled, the server's database cannot be changed for the lifetime of the device. */
 
-
-
-
-
-
-
-
 #define CENTRAL_LINK_COUNT              0                                           /**< Number of central links used by the application. When changing this number remember to adjust the RAM settings*/
 #define PERIPHERAL_LINK_COUNT           1                                           /**< Number of peripheral links used by the application. When changing this number remember to adjust the RAM settings*/
 
@@ -223,3 +216,15 @@ void gap_params_init(void)
     err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
     APP_ERROR_CHECK(err_code);
 }
+
+/* Initialize BLE
+ */
+void BLEInit()
+{
+		ble_stack_init();
+    gap_params_init();
+    services_init();
+    advertising_init();
+    conn_params_init();
+}  
+		

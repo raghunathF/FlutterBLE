@@ -8,7 +8,13 @@
 #include  "app_uart.h"
 #include 	"ble_nus.h"
 
+#include "FlutterUART.h"
+
+#define 	LENGTH_BLE_DATA								20
+
 extern ble_nus_t                        m_nus;                                      /**< Structure to identify the Nordic UART Service. */
+extern bool                             BLEReceiveDataReset;
+
 
 /**@brief   Function for handling app_uart events.
  *
@@ -18,7 +24,6 @@ extern ble_nus_t                        m_nus;                                  
  *          @ref NUS_MAX_DATA_LENGTH.
  */
 /**@snippet [Handling the data received over UART] */
-
 void uart_event_handle(app_uart_evt_t * p_event)
 {
     static uint8_t data_array[BLE_NUS_MAX_DATA_LEN];
@@ -30,17 +35,30 @@ void uart_event_handle(app_uart_evt_t * p_event)
         case APP_UART_DATA_READY:
             UNUSED_VARIABLE(app_uart_get(&data_array[index]));
             index++;
-
-            if ((data_array[index - 1] == '\n') || (index >= (BLE_NUS_MAX_DATA_LEN)))
-            {
-                err_code = ble_nus_string_send(&m_nus, data_array, index);
-                if (err_code != NRF_ERROR_INVALID_STATE)
-                {
-                    APP_ERROR_CHECK(err_code);
-                }
-
-                index = 0;
-            }
+						if(index == 1)
+						{
+							startUARTReceiveTimer();
+						}
+						
+						if(BLEReceiveDataReset)
+						{
+							BLEReceiveDataReset = false;
+							index=0;
+						}
+						else
+						{
+							if(index == LENGTH_BLE_DATA)
+							{
+									stopUARTReceiveTimer();
+									err_code = ble_nus_string_send(&m_nus, data_array, index);
+									if (err_code != NRF_ERROR_INVALID_STATE)
+									{
+											APP_ERROR_CHECK(err_code);
+									}
+									index = 0;
+							}
+						}
+            
             break;
 
         case APP_UART_COMMUNICATION_ERROR:

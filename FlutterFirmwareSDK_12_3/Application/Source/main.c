@@ -65,6 +65,8 @@
 #include <string.h>
 #include "nordic_common.h"
 #include "nrf.h"
+#include "nrf_delay.h"
+
 #include "ble_hci.h"
 #include "ble_advdata.h"
 #include "ble_advertising.h"
@@ -79,9 +81,16 @@
 #include "configGlobal.h"
 #include "FlutterBLEinit.h"
 #include "FlutterBLEPinout.h"
+#include "FlutterBLEControl.h"
+
+
+volatile uint8_t BLEReceiveBuffer[SIZE_DATA_BUFFER];
+volatile uint8_t headPointerReceiveBuffer = 0;
+volatile uint8_t tailPointerReceiveBuffer = 0;
+
 
 ble_nus_t                        m_nus; 
-
+bool BLEReceiveDataReset = false;
 
 /**@brief Application main function.
  */
@@ -89,15 +98,17 @@ int main(void)
 {
     uint32_t err_code;
 
-    // Initialize.
+    // Initialize the timer
     APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_OP_QUEUE_SIZE, false);
-	  initializeIO();
+	  
+		//Initialize UART
     UARTInit();
-    ble_stack_init();
-    gap_params_init();
-    services_init();
-    advertising_init();
-    conn_params_init();
+		
+		//Intialize IO
+    initializeIO();
+		
+		//BLE Init
+		BLEInit();
 
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
@@ -105,7 +116,8 @@ int main(void)
     // Enter main loop.
     for (;;)
     {
-        
+        BLEControlLoop();
+			  nrf_delay_ms(10);
     }
 }
 

@@ -57,3 +57,4 @@
 .\_build\flutterblecallbacks.o: ..\components\libraries\util\app_util_platform.h
 .\_build\flutterblecallbacks.o: ..\components\softdevice\s132\headers\nrf_nvic.h
 .\_build\flutterblecallbacks.o: Include\FlutterBLEPinout.h
+.\_build\flutterblecallbacks.o: Include\configGlobal.h

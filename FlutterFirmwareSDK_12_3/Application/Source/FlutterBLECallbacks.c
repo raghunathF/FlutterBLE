@@ -20,8 +20,12 @@
 #include "ble_nus.h"
 #include "app_uart.h"
 #include "app_util_platform.h"
-#include "FlutterBLEPinout.h"
 
+#include "FlutterBLEPinout.h"
+#include "configGlobal.h"
+extern volatile uint8_t BLEReceiveBuffer[SIZE_DATA_BUFFER];
+extern volatile uint8_t headPointerReceiveBuffer;
+extern volatile uint8_t tailPointerReceiveBuffer;
 
 #define DEAD_BEEF                       0xDEADBEEF                                  /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 #define APP_FEATURE_NOT_SUPPORTED       BLE_GATT_STATUS_ATTERR_APP_BEGIN + 2        /**< Reply when unsupported features are requested. */
@@ -67,15 +71,17 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 
 void nus_data_handler(ble_nus_t * p_nus, uint8_t * p_data, uint16_t length)
 {
+		BLEReceiveBuffer[headPointerReceiveBuffer] = length;
+		headPointerReceiveBuffer++;
     for (uint32_t i = 0; i < length; i++)
     {
-        while (app_uart_put(p_data[i]) != NRF_SUCCESS);
+				BLEReceiveBuffer[headPointerReceiveBuffer] = p_data[i];
+				headPointerReceiveBuffer++;
+				//while (app_uart_put(p_data[i]) != NRF_SUCCESS);
     }
 }
 
 /**@snippet [Handling the data received over BLE] */
-
-
 
 /**@brief Function for handling an event from the Connection Parameters Module.
  *

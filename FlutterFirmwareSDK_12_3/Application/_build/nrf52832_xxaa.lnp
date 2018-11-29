@@ -4,6 +4,8 @@
 ".\_build\flutterbleinit.o"
 ".\_build\fluttercallbacks.o"
 ".\_build\fluttername.o"
+".\_build\flutterblecontrol.o"
+".\_build\flutteruart.o"
 ".\_build\flutterblebsp.o"
 ".\_build\ble_advdata.o"
 ".\_build\ble_advertising.o"
