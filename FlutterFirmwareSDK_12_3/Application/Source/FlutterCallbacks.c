@@ -37,7 +37,7 @@ void uart_event_handle(app_uart_evt_t * p_event)
             index++;
 						if(index == 1)
 						{
-							startUARTReceiveTimer();
+							//startUARTReceiveTimer();
 						}
 						
 						if(BLEReceiveDataReset)
@@ -49,12 +49,12 @@ void uart_event_handle(app_uart_evt_t * p_event)
 						{
 							if(index == LENGTH_BLE_DATA)
 							{
-									stopUARTReceiveTimer();
+									//stopUARTReceiveTimer();
 									err_code = ble_nus_string_send(&m_nus, data_array, index);
-									if (err_code != NRF_ERROR_INVALID_STATE)
-									{
-											APP_ERROR_CHECK(err_code);
-									}
+									//if (err_code != NRF_ERROR_INVALID_STATE)
+									//{
+									//		APP_ERROR_CHECK(err_code);
+									//}
 									index = 0;
 							}
 						}

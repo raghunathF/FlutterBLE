@@ -26,19 +26,19 @@ void updateRGBBuffer(uint8_t* tempRGB, uint8_t* tempReceive , uint8_t color)
 		case RED:
 			for(i=1; i<19; i++)
 			{
-				tempRGB[i]   =	tempReceive[i-1];  
+				tempRGB[i]   =	tempReceive[i];  
 			}
 			break;
 		case GREEN:
 			for(i=1; i<19; i++)
 			{
-				tempRGB[18+i] =	tempReceive[i-1];  
+				tempRGB[18+i] =	tempReceive[i];  
 			}
 			break;
 		case BLUE:
 			for(i=1; i<19; i++)
 			{
-				tempRGB[36+i] =	tempReceive[i-1];  
+				tempRGB[36+i] =	tempReceive[i];  
 			}
 			break;
 		default:
@@ -60,7 +60,7 @@ void readRemainingBytes(uint8_t* temp , uint8_t length)
 void refreshRGBLED(uint8_t* RGBtemp)
 {
 	uint8_t i =0;
-	for(i=0;i<54;i++)
+	for(i=0;i<55;i++)
 	{
 		RGBtemp[i] = 0;
 	}
@@ -89,13 +89,13 @@ void BLEControlLoop()
 					if( ( ((tempReceiveBuffer[0]&TOTAL_PACKET_MASK)>>5) - ((tempReceiveBuffer[0]&CURRENT_PACKET_MASK)>>2) ) > 0  )
 					{		
 							//update the respective RGB Buffer
-							updateRGBBuffer( RGBValues ,tempReceiveBuffer+1 , color);
+							updateRGBBuffer( RGBValues ,tempReceiveBuffer , color);
 					}
 					else
 					{
 							//update the RGB Buffer
-							updateRGBBuffer( RGBValues ,tempReceiveBuffer+1 , color);
-							//Send the 54 bytes
+							updateRGBBuffer( RGBValues ,tempReceiveBuffer , color);
+							//Send the 55 bytes
 							for(i=0;i<55;i++)
 							{
 								while (app_uart_put(RGBValues[i]) != NRF_SUCCESS);

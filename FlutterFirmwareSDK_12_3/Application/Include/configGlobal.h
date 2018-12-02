@@ -20,4 +20,4 @@
 #define APP_TIMER_PRESCALER             0                                           /**< Value of the RTC1 PRESCALER register. */
 #define APP_TIMER_OP_QUEUE_SIZE         4                                           /**< Size of timer operation queues. */
 
-#define MAX_RECEIVE_MILLI_THRES         5
+#define MAX_RECEIVE_MILLI_THRES         15

@@ -50,7 +50,7 @@ void UARTInit()
                        UART_RX_BUF_SIZE,
                        UART_TX_BUF_SIZE,
                        uart_event_handle,
-                       APP_IRQ_PRIORITY_MID,
+                       APP_IRQ_PRIORITY_LOW,
                        err_code);
    APP_ERROR_CHECK(err_code);
 	 nrf_gpio_cfg_input(UART_RX_PIN, NRF_GPIO_PIN_PULLUP);
