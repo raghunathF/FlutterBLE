@@ -12,11 +12,12 @@
 #include "FlutterBLEPinout.h"
 #include "configGlobal.h"
 #include "app_uart.h"
+
+
 #include "FlutterBLEBSP.h"
 #include "FlutterCallbacks.h"
 #include "FlutterUART.h"
 
-#define PIN_UNUSED		0xFFFFFFFF
 
 /**
 *Initialize the Advertsing indicaion pin and BLE test pin as outputs

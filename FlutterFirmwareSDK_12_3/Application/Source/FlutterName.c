@@ -42,6 +42,9 @@ uint8_t* getDeviceName()
 	
 	deviceName[6] = convert_ascii(mac.addr[0]&0x0F);
 	deviceName[7] = '\0';
+
 	
 	return deviceName; 
 }
+
+

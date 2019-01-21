@@ -14,4 +14,5 @@
 
 #define    	BLE_ADV_PIN						7
 #define    	BLE_TEST_PIN					28
-		
+
+#define     LED_IN_PIN            13

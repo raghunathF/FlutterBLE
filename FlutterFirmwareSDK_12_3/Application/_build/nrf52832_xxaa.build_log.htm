@@ -22,15 +22,167 @@ Dialog DLL:      TCM.DLL V1.27.0.0
  
 <h2>Project:</h2>
 C:\Users\raghu\Desktop\Flutter\Firmware\BluetoothNRF5282\FlutterFirmwareSDK_12_3\Application\ble_app_uart_pca10040_s132.uvprojx
-Project File Date:  10/30/2018
+Project File Date:  01/18/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'nrf52832_xxaa'
+Rebuild target 'nrf52832_xxaa'
+compiling FlutterBLECallbacks.c...
+Include\configGlobal.h(29): warning:  #1-D: last line of file ends without a newline
+  #define BATTERY_THRESHOLD               100
+Source\FlutterBLECallbacks.c(132): warning:  #177-D: variable "err_code"  was declared but never referenced
+      uint32_t err_code;
+Source\FlutterBLECallbacks.c: 2 warnings, 0 errors
+compiling main.c...
+Include\FlutterBLEBSP.h(13): warning:  #1295-D: Deprecated declaration UARTInit - give arg types
+  void UARTInit();
+Include\FlutterBLEBSP.h(14): warning:  #1295-D: Deprecated declaration initializeIO - give arg types
+  void	initializeIO();
+Include\configGlobal.h(29): warning:  #1-D: last line of file ends without a newline
+  #define BATTERY_THRESHOLD               100
+Include\FlutterBLEinit.h(9): warning:  #1-D: last line of file ends without a newline
+  void BLEInit(void);
+Include\FlutterBLEControl.h(1): warning:  #1-D: last line of file ends without a newline
+  void BLEControlLoop();
+Include\FlutterBLEControl.h(1): warning:  #1295-D: Deprecated declaration BLEControlLoop - give arg types
+  void BLEControlLoop();
+Include\configGlobal.h(29): warning:  #1-D: last line of file ends without a newline
+  #define BATTERY_THRESHOLD               100
+Include\FlutterLED.h(20): warning:  #1295-D: Deprecated declaration LEDSPIInit - give arg types
+  void LEDSPIInit();
+Include\FlutterLED.h(21): warning:  #1295-D: Deprecated declaration fade - give arg types
+  void fade();
+Include\FlutterLED.h(23): warning:  #1-D: last line of file ends without a newline
+  void checkLEDStatus( uint8_t batteryVolatge);
+Source\main.c: 10 warnings, 0 errors
+compiling FlutterBLEInit.c...
+Include\FlutterBLEBSP.h(13): warning:  #1295-D: Deprecated declaration UARTInit - give arg types
+  void UARTInit();
+Include\FlutterBLEBSP.h(14): warning:  #1295-D: Deprecated declaration initializeIO - give arg types
+  void	initializeIO();
+Include\configGlobal.h(29): warning:  #1-D: last line of file ends without a newline
+  #define BATTERY_THRESHOLD               100
+Include\FlutterBLEInit.h(9): warning:  #1-D: last line of file ends without a newline
+  void BLEInit(void);
+Include\FlutterName.h(4): warning:  #1-D: last line of file ends without a newline
+  uint8_t* getDeviceName();
+Include\FlutterName.h(4): warning:  #1295-D: Deprecated declaration getDeviceName - give arg types
+  uint8_t* getDeviceName();
+Source\FlutterBLEInit.c: 6 warnings, 0 errors
+compiling FlutterName.c...
+Source\FlutterName.c(12): warning:  #186-D: pointless comparison of unsigned integer with zero
+  	if(input >= 0 & input <=9)
+Source\FlutterName.c(28): warning:  #177-D: variable "addr_byte"  was declared but never referenced
+  	uint8_t addr_byte 		= 0;
+Source\FlutterName.c: 2 warnings, 0 errors
+compiling FlutterBLEControl.c...
+Include\configGlobal.h(29): warning:  #1-D: last line of file ends without a newline
+  #define BATTERY_THRESHOLD               100
+FlutterBLEControl.c(147): warning:  #1-D: last line of file ends without a newline
+  }
+FlutterBLEControl.c(87): warning:  #177-D: variable "newPacketProgress"  was declared but never referenced
+  	bool newPacketProgress = false;
+FlutterBLEControl.c: 3 warnings, 0 errors
+compiling FlutterUART.c...
+Include\configGlobal.h(29): warning:  #1-D: last line of file ends without a newline
+  #define BATTERY_THRESHOLD               100
+Include\FlutterUART.h(4): warning:  #1295-D: Deprecated declaration startUARTReceiveTimer - give arg types
+  void startUARTReceiveTimer();
+Include\FlutterUART.h(5): warning:  #1295-D: Deprecated declaration stopUARTReceiveTimer - give arg types
+  void stopUARTReceiveTimer();
+Include\FlutterUART.h(6): warning:  #1-D: last line of file ends without a newline
+  void ReceiveTimerInit();
+Include\FlutterUART.h(6): warning:  #1295-D: Deprecated declaration ReceiveTimerInit - give arg types
+  void ReceiveTimerInit();
+FlutterUART.c(22): warning:  #167-D: argument of type "void (*)()" is incompatible with parameter of type "app_timer_timeout_handler_t"
+  	  err_code = app_timer_create(&UARTReceiveTimer, APP_TIMER_MODE_SINGLE_SHOT, UARTReceiveTimerHandler);
+FlutterUART.c(34): warning:  #1-D: last line of file ends without a newline
+  }
+FlutterUART.c: 7 warnings, 0 errors
+compiling FlutterCallbacks.c...
+Include\FlutterUART.h(4): warning:  #1295-D: Deprecated declaration startUARTReceiveTimer - give arg types
+  void startUARTReceiveTimer();
+Include\FlutterUART.h(5): warning:  #1295-D: Deprecated declaration stopUARTReceiveTimer - give arg types
+  void stopUARTReceiveTimer();
+Include\FlutterUART.h(6): warning:  #1-D: last line of file ends without a newline
+  void ReceiveTimerInit();
+Include\FlutterUART.h(6): warning:  #1295-D: Deprecated declaration ReceiveTimerInit - give arg types
+  void ReceiveTimerInit();
+Source\FlutterCallbacks.c(31): warning:  #550-D: variable "err_code"  was set but never used
+      uint32_t       err_code;
+Source\FlutterCallbacks.c: 5 warnings, 0 errors
+compiling FlutterBatteryMonitor.c...
+Include\configGlobal.h(29): warning:  #1-D: last line of file ends without a newline
+  #define BATTERY_THRESHOLD               100
+FlutterBatteryMonitor.c(82): warning:  #1-D: last line of file ends without a newline
+  */
+FlutterBatteryMonitor.c: 2 warnings, 0 errors
+compiling FlutterBLEBSP.c...
+Include\configGlobal.h(29): warning:  #1-D: last line of file ends without a newline
+  #define BATTERY_THRESHOLD               100
+Include\FlutterBLEBSP.h(13): warning:  #1295-D: Deprecated declaration UARTInit - give arg types
+  void UARTInit();
+Include\FlutterBLEBSP.h(14): warning:  #1295-D: Deprecated declaration initializeIO - give arg types
+  void	initializeIO();
+Include\FlutterCallbacks.h(5): warning:  #1-D: last line of file ends without a newline
+  void uart_event_handle(app_uart_evt_t * p_event);
+Include\FlutterUART.h(4): warning:  #1295-D: Deprecated declaration startUARTReceiveTimer - give arg types
+  void startUARTReceiveTimer();
+Include\FlutterUART.h(5): warning:  #1295-D: Deprecated declaration stopUARTReceiveTimer - give arg types
+  void stopUARTReceiveTimer();
+Include\FlutterUART.h(6): warning:  #1-D: last line of file ends without a newline
+  void ReceiveTimerInit();
+Include\FlutterUART.h(6): warning:  #1295-D: Deprecated declaration ReceiveTimerInit - give arg types
+  void ReceiveTimerInit();
+Source\FlutterBLEBSP.c: 8 warnings, 0 errors
+compiling FlutterLED.c...
+Include\configGlobal.h(29): warning:  #1-D: last line of file ends without a newline
+  #define BATTERY_THRESHOLD               100
+FlutterLED.c(53): warning:  #1295-D: Deprecated declaration SPI_init - give arg types
+  void SPI_init();
+FlutterLED.c(127): warning:  #177-D: variable "transferOngoing"  was declared but never referenced
+  	static bool transferOngoing = false;
+FlutterLED.c(129): warning:  #177-D: variable "counter"  was declared but never referenced
+  	static uint8_t counter = 31;
+FlutterLED.c(162): warning:  #177-D: variable "i"  was declared but never referenced
+  	uint8_t i = 0;
+FlutterLED.c(300): warning:  #550-D: variable "colorZero"  was set but never used
+  	static  colorInfo colorZero[3];
+FlutterLED.c: 6 warnings, 0 errors
+compiling ble_conn_params.c...
+compiling ble_advdata.c...
+compiling ble_advertising.c...
+compiling ble_srv_common.c...
+compiling ble_nus.c...
+compiling nrf_drv_clock.c...
+compiling nrf_drv_common.c...
+compiling nrf_drv_gpiote.c...
+compiling nrf_drv_uart.c...
+compiling nrf_drv_spi.c...
+compiling app_button.c...
+compiling app_error.c...
+compiling app_error_weak.c...
+compiling app_fifo.c...
+compiling app_timer.c...
+compiling app_util_platform.c...
+compiling fstorage.c...
+compiling app_uart_fifo.c...
+compiling hardfault_implementation.c...
+compiling nrf_assert.c...
+compiling retarget.c...
+compiling sdk_errors.c...
+compiling RTT_Syscalls_KEIL.c...
+compiling nrf_log_frontend.c...
+compiling nrf_log_backend_serial.c...
+compiling SEGGER_RTT_printf.c...
+assembling arm_startup_nrf52.s...
+compiling SEGGER_RTT.c...
+compiling system_nrf52.c...
+compiling softdevice_handler.c...
 linking...
-Program Size: Code=12172 RO-data=632 RW-data=136 ZI-data=9864  
+Program Size: Code=13756 RO-data=652 RW-data=148 ZI-data=10140  
 FromELF: creating hex file...
-".\_build\nrf52832_xxaa.axf" - 0 Error(s), 0 Warning(s).
+".\_build\nrf52832_xxaa.axf" - 0 Error(s), 51 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -57,10 +209,10 @@ Package Vendor: NordicSemiconductor
    * Component: ARM::CMSIS:CORE:4.3.0
 
    * Component: NordicSemiconductor::Device:Startup:8.11.1
-      Source file:   Device\Source\arm\arm_startup_nrf52.s
       Source file:   Device\Source\system_nrf52.c
+      Source file:   Device\Source\arm\arm_startup_nrf52.s
       Include file:  Device\Include\system_nrf52.h
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:26
 </pre>
 </body>
 </html>

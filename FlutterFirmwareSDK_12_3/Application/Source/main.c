@@ -82,15 +82,18 @@
 #include "FlutterBLEinit.h"
 #include "FlutterBLEPinout.h"
 #include "FlutterBLEControl.h"
+#include "FlutterLED.h"
 
 
 volatile uint8_t BLEReceiveBuffer[SIZE_DATA_BUFFER];
 volatile uint8_t headPointerReceiveBuffer = 0;
 volatile uint8_t tailPointerReceiveBuffer = 0;
 
+volatile bool spi_xfer_done = true;
+
 
 ble_nus_t                        m_nus; 
-bool BLEReceiveDataReset = false;
+bool BLEReceiveDataReset    =  false;
 
 /**@brief Application main function.
  */
@@ -109,14 +112,24 @@ int main(void)
 		
 		//BLE Init
 		BLEInit();
-
+	  
+	  
+	  //LED Init
+	  LEDSPIInit();
+		
+	  //Low Battery Monitor
+	  
+		
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
-
+		
+		
     // Enter main loop.
     for (;;)
     {
         BLEControlLoop();
+			  //checkLowBattery();
+			  //fade();
 			  nrf_delay_ms(10);
     }
 }

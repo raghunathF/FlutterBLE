@@ -21,3 +21,9 @@
 #define APP_TIMER_OP_QUEUE_SIZE         4                                           /**< Size of timer operation queues. */
 
 #define MAX_RECEIVE_MILLI_THRES         15
+
+#define PIN_UNUSED											0xFF
+
+//
+#define REACT_COUNT_THRESHOLD           8
+#define BATTERY_THRESHOLD               100

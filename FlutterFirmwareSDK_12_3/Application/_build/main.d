@@ -62,3 +62,6 @@
 .\_build\main.o: Include\FlutterBLEinit.h
 .\_build\main.o: Include\FlutterBLEPinout.h
 .\_build\main.o: Include\FlutterBLEControl.h
+.\_build\main.o: Include\FlutterLED.h
+.\_build\main.o: Include\FlutterBLEPinout.h
+.\_build\main.o: Include\configGlobal.h
