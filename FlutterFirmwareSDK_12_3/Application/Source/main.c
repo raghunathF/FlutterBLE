@@ -88,6 +88,7 @@
 volatile uint8_t BLEReceiveBuffer[SIZE_DATA_BUFFER];
 volatile uint8_t headPointerReceiveBuffer = 0;
 volatile uint8_t tailPointerReceiveBuffer = 0;
+volatile bool connection = false;
 
 volatile bool spi_xfer_done = true;
 
@@ -116,7 +117,9 @@ int main(void)
 	  
 	  //LED Init
 	  LEDSPIInit();
-		
+	
+		//LED adversting indication
+		LEDAdvInit();
 	  //Low Battery Monitor
 	  
 		
@@ -127,6 +130,7 @@ int main(void)
     // Enter main loop.
     for (;;)
     {
+				LEDControlLoop();
         BLEControlLoop();
 			  //checkLowBattery();
 			  //fade();

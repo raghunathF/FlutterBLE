@@ -14,7 +14,10 @@
 #include "ble_gap.h"
 
 #include "FlutterLED.h"
+#include "app_timer.h"
 
+
+APP_TIMER_DEF(LEDFadeTimer);
 /************************************************************************/
 /******************     Define         **********************************/
 /************************************************************************/
@@ -25,12 +28,15 @@
 #define NoBytesLED 12
 #define STARTZEROS 12*5
 
+#define MAX_FADE_MILLI_THRES 300
+
+uint8_t LEDThreshold = 100;
 #define LED_BRIGHTNESS_THRESHOLD 50
 
 #define TWOBITSPIVALUES {0x88,0x8E,0xE8,0xEE}
 #define TOTAL_SPI_LENGTH  NOLEDS*NoBytesLED+2*STARTZEROS
 
-enum colors{NOCOLOR,RED,GREEN,BLUE,YELLOW,PINK,SKYBLUE,WHITE};
+enum colors{RED,GREEN,BLUE,YELLOW,PINK,SKYBLUE,WHITE};
 
 
 const	uint8_t SPIDataConertConsArray[] = TWOBITSPIVALUES;
@@ -47,7 +53,7 @@ static  colorInfo colorInitial[3];
 static  colorInfo colorZero[3];
 
 
-
+extern bool volatile connection;
 
 //Prototyoes
 void SPI_init();
@@ -59,6 +65,7 @@ void SPI_init();
 /************************************************************************/
 nrf_drv_spi_t    spi	= 	NRF_DRV_SPI_INSTANCE(SPI_INSTANCE);  /**< SPI instance. */
 extern  volatile bool 		spi_xfer_done;  /**< Flag used to indicate that SPI instance completed the transfer. */
+volatile bool 		LEDUpdate;
 static  uint8_t       		m_rx_buf[20];           /**< RX buffer. */
 
 
@@ -164,7 +171,7 @@ void updateColors(colorInfo* RGBInitial,uint8_t LEDNumber,uint8_t RContent , uin
 	//RContent
 	if(RContent == 1)
 	{
-		RGBInitial[LEDNumber].RBrightness = LED_BRIGHTNESS_THRESHOLD;
+		RGBInitial[LEDNumber].RBrightness = LEDThreshold;
 	}
 	else
 	{
@@ -174,7 +181,7 @@ void updateColors(colorInfo* RGBInitial,uint8_t LEDNumber,uint8_t RContent , uin
 	//GContent
 	if(GContent == 1)
 	{
-		RGBInitial[LEDNumber].GBrightness = LED_BRIGHTNESS_THRESHOLD;
+		RGBInitial[LEDNumber].GBrightness = LEDThreshold;
 	}
 	else
 	{
@@ -184,7 +191,7 @@ void updateColors(colorInfo* RGBInitial,uint8_t LEDNumber,uint8_t RContent , uin
 	//BContent
 	if(BContent == 1)
 	{
-		RGBInitial[LEDNumber].BBrightness = LED_BRIGHTNESS_THRESHOLD;
+		RGBInitial[LEDNumber].BBrightness = LEDThreshold;
 	}
 	else
 	{
@@ -197,15 +204,114 @@ void updateColors(colorInfo* RGBInitial,uint8_t LEDNumber,uint8_t RContent , uin
 uint8_t* setLED2Address()
 {
 	static uint8_t LEDColors[3];
+	volatile uint32_t temp =0;
+	uint8_t mid6    = 0;
+	uint8_t top6    = 0;
+	uint8_t bot8    = 0;
+	uint8_t bot8_1  = 0;
+	uint8_t bot8_2  = 0;
+	
 	ble_gap_addr_t 				mac;
 	sd_ble_gap_addr_get(&mac);
 	
-	LEDColors[0] = mac.addr[2] % 7;
-	LEDColors[1] = mac.addr[1] % 7;
-	LEDColors[2] = mac.addr[0] % 7;
+	temp  = (uint32_t)(mac.addr[2]&0x0F)<<(16);
+	temp |= (uint32_t)(mac.addr[1] << (8));
+  temp |=  (uint32_t)(mac.addr[0]);
+	
+	bot8   =  temp%256;
+	bot8_1 =  bot8%16;
+	bot8_2 =  (bot8/16)%16;
+	
+	mid6    = (temp/256)%64;
+	top6    = (temp/256)/64;
+	
+	LEDColors[0] = (bot8_1+bot8_2)%7;
+	LEDColors[1] = mid6%7;
+	LEDColors[2] = top6%7;
+	
 	return LEDColors;
 	
 }
+
+
+
+
+void LEDFadeTimerHandler()
+{
+		//Reset UART data
+	  LEDUpdate = true;
+}
+
+
+
+/************************************************************************/
+void LEDAdvInit()
+{
+  	volatile ret_code_t err_code;
+	  err_code = app_timer_create(&LEDFadeTimer, APP_TIMER_MODE_REPEATED , LEDFadeTimerHandler);
+    APP_ERROR_CHECK(err_code);
+}
+
+void startLEDFadeTimer()
+{
+		app_timer_start( LEDFadeTimer, APP_TIMER_TICKS(MAX_FADE_MILLI_THRES, 0), NULL);
+}	
+
+void stopLEDFadeTimer()
+{
+		app_timer_stop(LEDFadeTimer);
+}
+
+
+void LEDControlLoop()
+{
+	static bool timerStarted = false;
+	static bool on  = false;
+	
+	if(connection == false)
+	{
+		if(timerStarted == false)
+		{
+			//start  the timer
+			startLEDFadeTimer();
+			timerStarted = true;
+			on = true;
+		}
+		else
+		{
+			if(LEDUpdate == true)
+			{
+				LEDUpdate = false;	
+				if(on == true)
+				{
+					on = false;
+					SetAllLEDs(colorInitial);
+				}
+				else
+				{
+					on = true;
+					SetAllLEDs(colorZero);
+				}
+			}
+			
+		}
+	}
+	else
+	{
+		
+		if(timerStarted == true)
+		{
+			SetAllLEDs(colorInitial);
+			//Set LED
+			//stop the timer
+			stopLEDFadeTimer();
+			timerStarted = false;
+		}
+	}
+		
+}
+
+
 
 
 //
@@ -215,16 +321,19 @@ void initLEDS()
 	uint8_t i =0;
 	
 	uint8_t RContent = 0;
-	uint8_t GContent = 0;
-	uint8_t BContent = 0;
+uint8_t GContent = 0;
+uint8_t BContent = 0;
+
 	
 	
 	uint8_t* LEDColor = NULL;
 	LEDColor = setLED2Address();
+	LEDThreshold = 50;
 	for(i=0;i<NOLEDS;i++)
 	{
 		switch(LEDColor[i])
 		{
+			
 			case RED :
 				RContent = 1;
 			  GContent = 0;
@@ -243,6 +352,7 @@ void initLEDS()
 			  BContent = 1;
 				
 				break;
+			
 			case YELLOW:
 				RContent = 1;
 			  GContent = 1;
@@ -297,7 +407,7 @@ void fade()
 
 void initLEDZero()
 {
-	static  colorInfo colorZero[3];
+	//static  colorInfo colorZero[3];
 	uint8_t i =0;
 
 	for(i=0;i<3;i++)

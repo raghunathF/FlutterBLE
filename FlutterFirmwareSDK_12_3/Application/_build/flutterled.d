@@ -37,3 +37,5 @@
 .\_build\flutterled.o: ..\components\softdevice\s132\headers\nrf_svc.h
 .\_build\flutterled.o: FlutterLED.h
 .\_build\flutterled.o: Include\configGlobal.h
+.\_build\flutterled.o: ..\components\libraries\timer\app_timer.h
+.\_build\flutterled.o: ..\components\libraries\util\app_util.h

@@ -19,5 +19,7 @@
 
 void LEDSPIInit();
 void fade();
+void LEDAdvInit();
 
 void checkLEDStatus( uint8_t batteryVolatge);
+void LEDControlLoop();
